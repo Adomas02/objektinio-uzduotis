@@ -156,7 +156,6 @@ void ivestisDidejantisMasyvas(Mokinys mok[],int i, int did)
 }
 Mokinys* didintMasyva(Mokinys mok[],int did)
 {
-	cout << "IVYKO"<<endl;
 	 Mokinys* tempMas;
 	 tempMas = new Mokinys[did + 5];
 	 for (int i = 0;i < did;i++)
