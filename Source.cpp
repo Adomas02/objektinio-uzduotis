@@ -16,86 +16,94 @@ struct Mokinys {
 	int egz, kiek;
 	double rezult = 0;
 };
-void ivestis(Mokinys& mok);
-void isvestis(Mokinys& mok);
-double skaiciavimas(double a, Mokinys& mok);
-double skaiciavimasVid(Mokinys& mok);
-void rikiavimas(Mokinys& mok);
-double skaiciavimasMed(Mokinys& mok);
-void pazymiuIvestis(Mokinys& mok);
+void ivestis(Mokinys mok[],int i);
+void isvestis(Mokinys mok[],int i);
+double skaiciavimas(double a, Mokinys mok[], int i);
+double skaiciavimasVid(Mokinys mok[], int i);
+void rikiavimas(Mokinys mok[],int n);
+double skaiciavimasMed(Mokinys mok[], int i);
+void pazymiuIvestis(Mokinys mok[],int i);
+void ivestisDidejantisMasyvas(Mokinys mok[], int i, int did);
+Mokinys* didintMasyva(Mokinys mok[], int did);
 
 int main()
 {
-	Mokinys a;
-	ivestis(a);
-	rikiavimas(a);
-	isvestis(a);
-	delete[] a.paz;
+	
+	int did = 1;
+	Mokinys* A;
+	A = new Mokinys[did];
+
+	int i = 0;
+	
+	ivestisDidejantisMasyvas(A,i,did);
 }
-void ivestis(Mokinys& mok)
+void ivestis(Mokinys mok[],int i)
 {
 	cout << "Iveskite mokinio varda ";
-	cin >> mok.vardas;
+	cin >> mok[i].vardas;
 	cout << "Iveskite mokinio pavarde ";
-	cin >> mok.pavarde;
-	mok.paz = new int[100];
-	pazymiuIvestis(mok);
+	cin >> mok[i].pavarde;
+	mok[i].paz = new int[100];
+	pazymiuIvestis(mok,i);
 	cout << "Iveskite egzamino pazymi ";
-	cin >> mok.egz;
+	cin >> mok[i].egz;
 }
-void isvestis(Mokinys& mok)
+void isvestis(Mokinys mok[], int i)
 {
 	cout << "Vardas" << setw(10) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20) <<"Galutinis (Med.)" << endl;
 	cout << "----------------------------------------------------------" << endl;
-	cout << mok.vardas << setw(10) << mok.pavarde << setw(15) << fixed << setprecision(2) << skaiciavimasVid(mok)<< setw(15) << fixed << setprecision(2) << skaiciavimasMed(mok) << endl;
+	for (int j = 0;j < i;j++)
+	{
+		cout << mok[j].vardas << setw(10) << mok[j].pavarde << setw(15) << fixed << setprecision(2) << skaiciavimasVid(mok, j) << setw(15) << fixed << setprecision(2) << skaiciavimasMed(mok, j) << endl;
+	}
 }
-double skaiciavimasVid(Mokinys& mok)
+double skaiciavimasVid(Mokinys mok[], int n)
 {
 	double sum = 0, vid;//pazymiu suma, vidurkis
-	for (int i = 0;i < mok.kiek;i++)
+	for (int i = 0;i < mok[i].kiek;i++)
 	{
-		sum += mok.paz[i];
+		sum += mok[n].paz[i];
 	}
-	vid = sum / mok.kiek;
-	mok.rezult=skaiciavimas(vid,mok);
-	return mok.rezult;
+	vid = sum / mok[n].kiek;
+	mok[n].rezult=skaiciavimas(vid,mok,n);
+	return mok[n].rezult;
 }
-void rikiavimas(Mokinys& mok)
+void rikiavimas(Mokinys mok[], int n)
 {
 	int laikinas;
-	for (int i = 0;i < mok.kiek; i++)
-		for (int j = i + 1;j < mok.kiek;j++)
+	for (int i = 0;i < mok[n].kiek; i++)
+		for (int j = i + 1;j < mok[n].kiek;j++)
 		{
-			if (mok.paz[i] > mok.paz[j])
+			if (mok[n].paz[i] > mok[n].paz[j])
 			{
-				laikinas = mok.paz[i];
-				mok.paz[i] = mok.paz[j];
-				mok.paz[j] = laikinas;
+				laikinas = mok[n].paz[i];
+				mok[n].paz[i] = mok[n].paz[j];
+				mok[n].paz[j] = laikinas;
 			}
 
 		}
 }
-double skaiciavimas(double a,Mokinys& mok)
+double skaiciavimas(double a, Mokinys mok[],int i)
 {
-	mok.rezult = 0.4 * a + 0.6 * mok.egz;
-	return mok.rezult;
+	mok[i].rezult = 0.4 * a + 0.6 * mok[i].egz;
+	return mok[i].rezult;
 }
-double skaiciavimasMed(Mokinys& mok)
+double skaiciavimasMed(Mokinys mok[],int i)
 {
-	if (mok.kiek % 2 == 0)
+	if (mok[i].kiek % 2 == 0)
 	{
 		double laikMed;
-		laikMed =( (mok.paz[mok.kiek / 2] + mok.paz[mok.kiek / 2 - 1]) / 2.0);
-		mok.rezult = skaiciavimas(laikMed, mok);
-		return mok.rezult;
+		laikMed =( (mok[i].paz[mok[i].kiek / 2] + mok[i].paz[mok[i].kiek / 2 - 1]) / 2.0);
+		mok[i].rezult = skaiciavimas(laikMed, mok,i);
+		return mok[i].rezult;
 	}
 	else
 	{
-		mok.rezult = skaiciavimas(mok.paz[mok.kiek/2], mok);
-		return mok.rezult;
+		mok[i].rezult = skaiciavimas(mok[i].paz[mok[i].kiek/2], mok,i);
+		return mok[i].rezult;
 	}
 }
-void pazymiuIvestis(Mokinys& mok)
+void pazymiuIvestis(Mokinys mok[],int n)
 {
 	char yesNo;
 	int i = 0;
@@ -105,13 +113,55 @@ void pazymiuIvestis(Mokinys& mok)
 		cin >> yesNo;
 		if (yesNo == 'y')
 		{
-			cin >> mok.paz[i];
+			cin >> mok[n].paz[i];
 			i++;
-			mok.kiek = i;
+			mok[n].kiek = i;
 		}
 		else
 		{
 			break;
 		}
 	}
+}
+void ivestisDidejantisMasyvas(Mokinys mok[],int i, int did)
+{
+	char yes;
+	while (1)
+	{
+		cout << "Ar norite ivesti mokini? (y/n) ";
+		cin >> yes;
+		if (yes == 'y')
+		{
+			if (i == did-1)
+			{
+				ivestis(mok, i);
+				rikiavimas(mok, i);
+				i++;
+				ivestisDidejantisMasyvas(didintMasyva(mok, did), i, did + 5);
+			}
+			else
+			{
+				ivestis(mok, i);
+				rikiavimas(mok, i);
+				i++;
+			}
+		
+		}
+		else
+		{
+			break;
+		}
+	}
+	isvestis(mok, i);
+}
+Mokinys* didintMasyva(Mokinys mok[],int did)
+{
+	cout << "IVYKO"<<endl;
+	 Mokinys* tempMas;
+	 tempMas = new Mokinys[did + 5];
+	 for (int i = 0;i < did;i++)
+	 {
+		 tempMas[i] = mok[i];
+	 }
+	 return tempMas;
 }
