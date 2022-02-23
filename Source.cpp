@@ -12,7 +12,7 @@ using std::setprecision;
 
 struct Mokinys {
 	string vardas, pavarde;
-	int* paz;
+	int paz[100];
 	int egz, kiek;
 	double rezult = 0;
 };
@@ -43,7 +43,6 @@ void ivestis(Mokinys mok[],int i)
 	cin >> mok[i].vardas;
 	cout << "Iveskite mokinio pavarde ";
 	cin >> mok[i].pavarde;
-	mok[i].paz = new int[100];
 	pazymiuIvestis(mok,i);
 	cout << "Iveskite egzamino pazymi ";
 	cin >> mok[i].egz;
