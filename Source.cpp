@@ -19,7 +19,7 @@ using std::setprecision;
 using std::setw;
 using std::string;
 
-//const int kiek = 15;
+
 
 struct Mokinys
 {
@@ -84,14 +84,18 @@ void ivestis(std::vector<Mokinys> &mok,int kiek)
 }*/
 void isvestis(std::vector<Mokinys> &mok,int kiek)
 {
-	cout << "Vardas" << setw(20) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20) << "Galutinis (Med.)" << endl;
-	cout << "----------------------------------------------------------" << endl;
+	std::ofstream out_f("kursiokai.txt");
+	
+	//out_f << outputas;
+	out_f.close();
+	out_f << "Vardas" << setw(20) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20) << "Galutinis (Med.)" << endl;
+	out_f << "----------------------------------------------------------" << endl;
 	int i=0;
-	sortabc(mok);
+	//sortabc(mok);
 	for (Mokinys &m : mok)
 		{
 			rikiavimas(mok, i,kiek);
-			cout << mok[i].vardas << setw(20) << mok[i].pavarde << setw(15) << fixed << setprecision(2) << skaiciavimasVid(mok, i,kiek) << setw(15) << fixed << setprecision(2) << skaiciavimasMed(mok, i,kiek) << endl;
+			out_f << mok[i].vardas << setw(20) << mok[i].pavarde << setw(15) << fixed << setprecision(2) << skaiciavimasVid(mok, i,kiek) << setw(15) << fixed << setprecision(2) << skaiciavimasMed(mok, i,kiek) << endl;
 			i++;
 		}
 
@@ -185,8 +189,6 @@ void bufer_nusk(std::string read_vardas, std::string write_vardas)
 
 			std::vector<std::string> eilDalys = split(eil,' ');
 
-			
-
 			Mokinys mok=Mokinys();
 			mok.vardas = eilDalys[0];
 			mok.pavarde = eilDalys[1];
@@ -211,7 +213,7 @@ void bufer_nusk(std::string read_vardas, std::string write_vardas)
 	}
 
 	isvestis(mokiniai,kiek-3);
-
+	/*
 	//vektroiaus konvertavimas i viena eilute
 	std::string outputas = "";
 	for (std::string &a : splited)
@@ -221,7 +223,7 @@ void bufer_nusk(std::string read_vardas, std::string write_vardas)
 	//Failo isvedimas per viena eilute
 	std::ofstream out_f(write_vardas);
 	out_f << outputas;
-	out_f.close();
+	out_f.close();*/
 }
 std::vector<std::string> split(std::string str, char delimiter)
 {
