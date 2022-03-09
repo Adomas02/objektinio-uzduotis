@@ -24,7 +24,7 @@ using std::string;
 struct Mokinys
 {
 	string vardas, pavarde;
-	int* paz= new int[];
+	int* paz;
 	int egz;
 	double rezult = 0;
 };
@@ -48,6 +48,7 @@ int main()
 	//ivestis(mok);
 	bufer_nusk("studentai.txt", "kursiokai.txt");
 }
+/*
 void ivestis(std::vector<Mokinys> &mok,int kiek)
 {
 	int i = 0;
@@ -80,7 +81,7 @@ void ivestis(std::vector<Mokinys> &mok,int kiek)
 		}
 	}
 	//isvestis(mok, i);
-}
+}*/
 void isvestis(std::vector<Mokinys> &mok,int kiek)
 {
 	cout << "Vardas" << setw(20) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20) << "Galutinis (Med.)" << endl;
@@ -209,7 +210,7 @@ void bufer_nusk(std::string read_vardas, std::string write_vardas)
 
 	}
 
-	isvestis(mokiniai,kiek);
+	isvestis(mokiniai,kiek-3);
 
 	//vektroiaus konvertavimas i viena eilute
 	std::string outputas = "";
