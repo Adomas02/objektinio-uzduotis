@@ -87,7 +87,7 @@ void isvestis(std::vector<Mokinys> &mok,int kiek)
 	std::ofstream out_f("kursiokai.txt");
 	
 	//out_f << outputas;
-	out_f.close();
+	
 	out_f << "Vardas" << setw(20) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20) << "Galutinis (Med.)" << endl;
 	out_f << "----------------------------------------------------------" << endl;
 	int i=0;
@@ -98,6 +98,7 @@ void isvestis(std::vector<Mokinys> &mok,int kiek)
 			out_f << mok[i].vardas << setw(20) << mok[i].pavarde << setw(15) << fixed << setprecision(2) << skaiciavimasVid(mok, i,kiek) << setw(15) << fixed << setprecision(2) << skaiciavimasMed(mok, i,kiek) << endl;
 			i++;
 		}
+		out_f.close();
 
 }
 double skaiciavimasVid(std::vector<Mokinys> &mok, int a,int kiek)
