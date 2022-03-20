@@ -343,3 +343,4 @@ healthchecksdb
 *.filters
 *.exe
 kursiokai.txt
+*.txt
